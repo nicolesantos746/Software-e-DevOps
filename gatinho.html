@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gatinhos Aleatórios</title>
+    <style>
+        img { width: 300px; display: block; margin: 10px 0; border-radius: 8px; }
+        button { padding: 10px; cursor: pointer; background: #28a745; color: white; border: none; }
+    </style>
+</head>
+<body>
+
+    <h1>Gerador de Gatinhos 🐾</h1>
+    <button id="btn-gatinho">Ver outro gatinho</button>
+    
+    <div id="container-imagem"></div>
+
+    <script>
+        const btn = document.getElementById('btn-gatinho');
+        const container = document.getElementById('container-imagem');
+
+        async function buscarGatinho() {
+         
+            const resposta = await fetch('https://api.thecatapi.com/v1/images/search');
+            const dados = await resposta.json();
+
+            
+            const urlImagem = dados[0].url;
+
+            
+            container.innerHTML = `<img src="${urlImagem}" alt="Gatinho fofo">`;
+        }
+
+     
+        btn.addEventListener('click', buscarGatinho);
+
+       
+        buscarGatinho();
+    </script>
+</body>
+</html>
